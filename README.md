@@ -26,8 +26,8 @@ My samples of binaries developed with go language.
 
 ## Contributing
 
-1. Install packages: `git`, `go`, `wget`. Or use Go in Docker: https://hub.docker.com/_/golang
-2. Clone the repository to your machine through the command: `git clone https://github.com/aeciopires/go_mysamples.git`
+1. Install packages: `git`, `go`, `curl`. Or use Go in Docker: https://hub.docker.com/_/golang
+2. Clone the repository to your machine through the command: `git clone https://github.com/aeciopires/go_mysamples`
 3. Go to the project folder: `cd go_mysamples`
 4. Create a branch using the pattern: `git checkout -b US-${DEV_NAME}`. Example: *git checkout -b US-AECIO*
 5. Develop the task
@@ -44,6 +44,34 @@ developer: Aécio dos Santos Pires<br>
 mail: http://blog.aeciopires.com/contato
 
 ## Tutorials
+
+Use Go in Docker: https://hub.docker.com/_/golang
+
+Or
+
+Install go from source:
+
+```
+VERSION=1.13.5
+
+curl https://dl.google.com/go/go$VERSION.linux-amd64.tar.gz -o go.tar.gz
+
+sudo tar -C /usr/local -xzf go.tar.gz
+
+export PATH=$PATH:/usr/local/go/bin
+
+go version
+```
+
+Executing programs with go. Exemple:
+
+```
+git clone https://github.com/aeciopires/go_mysamples
+
+cd go_mysamples/src
+
+go run helloword.go
+```
 
 Tutorials and documentation about go language:
 
