@@ -76,6 +76,20 @@ go run helloword.go
 Tutorials and documentation about go language:
 
 * https://medium.com/@denis_santos/primeiros-passos-com-golang-c3368f6d707a
+* https://tour.golang.org
+* https://www.youtube.com/watch?v=YS4e4q9oBaU
+* https://www.youtube.com/watch?v=Q0sKAMal4WQ
+* https://www.youtube.com/watch?v=G3PvTWRIhZA
+* https://stackify.com/learn-go-tutorials/
+* https://golangbot.com/
+* https://www.tutorialspoint.com/go/index.htm
+* https://www.guru99.com/google-go-tutorial.html
+* http://www.golangbr.org/doc/codigo
+* https://golang.org/doc/articles/wiki/
+* https://gobyexample.com/
+* https://hackr.io/tutorials/learn-golang
+* https://hackernoon.com/basics-of-golang-for-beginners-6bd9b40d79ae
+* https://medium.com/hackr-io/learn-golang-best-go-tutorials-for-beginners-deb6cab45867
 
 
 ## License
