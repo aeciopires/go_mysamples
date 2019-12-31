@@ -47,6 +47,20 @@ mail: http://blog.aeciopires.com/contato
 
 Use Go in Docker: https://hub.docker.com/_/golang
 
+```
+git clone https://github.com/aeciopires/go_mysamples
+
+cd go_mysamples/src
+
+VERSION=1.13.5-alpine
+
+docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp golang:$VERSION go build -v
+
+./myapp
+```
+
+This will add your current directory as a volume to the container, set the working directory to the volume, and run the command go build which will tell go to compile the project in the working directory and output the executable to myapp.
+
 Or
 
 Install go from source:
