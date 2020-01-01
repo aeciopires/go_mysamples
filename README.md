@@ -1,6 +1,6 @@
 # go_mysamples
 
-[![Codeac.io](https://static.codeac.io/badges/2-142351717.svg)](https://app.codeac.io/github/aeciopires/go_mysamples)
+[![Codeac.io](https://static.codeac.io/badges/2-231147601.svg)](https://app.codeac.io/github/aeciopires/go_mysamples)
 
 [English]: #english
 [Contributing]: #contributing
@@ -50,7 +50,7 @@ Use Go in Docker: https://hub.docker.com/_/golang
 ```
 git clone https://github.com/aeciopires/go_mysamples
 
-cd go_mysamples/src
+cd go_mysamples/src/helloworld
 
 VERSION=1.13.5-alpine
 
@@ -82,9 +82,9 @@ Executing programs with go. Exemple:
 ```
 git clone https://github.com/aeciopires/go_mysamples
 
-cd go_mysamples/src
+cd go_mysamples/src/helloworld
 
-go run helloword.go
+go run helloworld.go
 ```
 
 Tutorials and documentation about go language:
