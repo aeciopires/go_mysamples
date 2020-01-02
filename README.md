@@ -71,8 +71,8 @@ git clone https://github.com/aeciopires/go_mysamples
 cd go_mysamples/src/helloworld
 
 VERSION=1.13.5-alpine
-
-docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp golang:$VERSION go build -v
+GO_WORKSPACE=/usr/local/go/src
+docker run --rm -v $GO_WORKSPACE/:/go/src/ -v "$PWD":/usr/src/myapp -w /usr/src/myapp golang:$VERSION go build -v
 
 ./myapp
 ```
