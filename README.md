@@ -2,7 +2,7 @@
 
 [![Codeac.io](https://static.codeac.io/badges/2-231147601.svg)](https://app.codeac.io/github/aeciopires/go_mysamples)
 
-[Portugues]: #portugues
+[Português]: #português
 [English]: #english
 [Contributing]: #contributing
 [Developers]: #developers
