@@ -64,7 +64,4 @@ func main() {
 		fmt.Printf("dot%v: %#v\n", i+1, dots[i])
 	}
 
-	type PointXY struct{ X, Y int }
-	a := PointXY{2, 3}
-	b := PointXY{3, 2}
 }
