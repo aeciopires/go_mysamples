@@ -5,6 +5,11 @@ import (
 	"os"
 )
 
+/* References about maps:
+https://courses.packtpub.com/courses/take/go/texts/9762168-exercise-4-13-creating-reading-and-writing-a-map
+https://courses.packtpub.com/courses/take/go/texts/9762178-exercise-4-14-reading-from-a-map
+*/
+
 // Create global variable with map of strings
 var users = map[string]string{
 	"305": "Sue",
