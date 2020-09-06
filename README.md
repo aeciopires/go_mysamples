@@ -52,6 +52,8 @@ Tutorials and documentation about **Go** language:
 * https://hackr.io/tutorials/learn-golang
 * https://hackernoon.com/basics-of-golang-for-beginners-6bd9b40d79ae
 * https://medium.com/hackr-io/learn-golang-best-go-tutorials-for-beginners-deb6cab45867
+* https://github.com/dariubs/GoBooks#readme
+* https://www.digitalocean.com/community/books/how-to-code-in-go-ebook-pt
 
 ## Go in Docker
 
