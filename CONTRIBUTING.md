@@ -17,6 +17,7 @@
     * Markdown-lint: https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint
     * Markdown-toc: https://marketplace.visualstudio.com/items?itemName=AlanWalk.markdown-toc
     * Markdown-all-in-one: https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
+    * Go: https://marketplace.visualstudio.com/items?itemName=golang.Go
 
 * Configure authentication on your Github account to use the SSH protocol instead of HTTP. Watch this tutorial to learn how to set up: https://help.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
 
