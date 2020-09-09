@@ -38,10 +38,18 @@ Tutorials and documentation about **Go** language:
 * http://aprendago.com
 * https://golang.org/doc
 * https://medium.com/@denis_santos/primeiros-passos-com-golang-c3368f6d707a
+* https://sensedia.com/conteudo/introducao-ao-golang/
+* https://sensedia.com/conteudo/motivos-para-utilizar-go
+* https://sensedia.com/conteudo/estrutura-da-linguagem-go
+* https://www.linode.com/docs/development/go/install-go-on-ubuntu/
+* https://tecadmin.net/install-go-on-macos/
+* https://sourabhbajaj.com/mac-setup/Go/README.html
 * https://tour.golang.org
 * https://www.youtube.com/watch?v=YS4e4q9oBaU
 * https://www.youtube.com/watch?v=Q0sKAMal4WQ
 * https://www.youtube.com/watch?v=G3PvTWRIhZA
+* https://www.youtube.com/watch?v=_MkQLDMak-4
+* https://www.youtube.com/watch?v=JepHr8egvBI
 * https://stackify.com/learn-go-tutorials
 * https://golangbot.com
 * https://www.tutorialspoint.com/go/index.htm
@@ -54,6 +62,12 @@ Tutorials and documentation about **Go** language:
 * https://medium.com/hackr-io/learn-golang-best-go-tutorials-for-beginners-deb6cab45867
 * https://github.com/dariubs/GoBooks#readme
 * https://www.digitalocean.com/community/books/how-to-code-in-go-ebook-pt
+* https://dzone.com/articles/golang-tutorial-learn-golang-by-examples
+* https://dzone.com/articles/structure-of-a-go-program 
+* https://gobyexample.com/
+* https://awesome-go.com/
+* https://research.swtch.com/
+* https://levelup.gitconnected.com/get-a-taste-of-concurrency-in-go-625e4301810f
 
 ## Go in Docker
 
