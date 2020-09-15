@@ -70,6 +70,8 @@ Tutorials and documentation about **Go** language:
 * https://awesome-go.com/
 * https://research.swtch.com/
 * https://levelup.gitconnected.com/get-a-taste-of-concurrency-in-go-625e4301810f
+* https://golang.org/doc/effective_go.html
+* https://www.golangprograms.com/go-language.html
 
 ## Go in Docker
 
