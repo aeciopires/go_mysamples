@@ -60,17 +60,20 @@ Install Go with the follow commands.
 
 ```bash
 VERSION=1.15
- 
+
 mkdir -p $HOME/go/bin
- 
+
 curl https://dl.google.com/go/go$VERSION.linux-amd64.tar.gz -o go.tar.gz
- 
+
 sudo tar -C /usr/local -xzf go.tar.gz
- 
+
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
- 
+
 go version
+
+echo "export GOPATH=$HOME/go" >> ~/.bashrc
+echo "export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin" >> ~/.bashrc
 ```
 
 For more information about Go visit:

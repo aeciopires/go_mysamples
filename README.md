@@ -72,6 +72,8 @@ Tutorials and documentation about **Go** language:
 * https://levelup.gitconnected.com/get-a-taste-of-concurrency-in-go-625e4301810f
 * https://golang.org/doc/effective_go.html
 * https://www.golangprograms.com/go-language.html
+* https://golang.org/ref/spec
+* https://golang.org/pkg/fmt/
 
 ## Go in Docker
 
@@ -106,6 +108,10 @@ cd go_mysamples/src/helloworld
 go build helloworld.go
 
 ./helloworld
+
+#or
+
+go run helloworld.go
 ```
 
 ## Developers
@@ -115,6 +121,6 @@ mail: http://blog.aeciopires.com/contato
 
 ## License
 
-GPL-3.0 2020 Aécio dos Santos Pires
+GPL-3.0 2021 Aécio dos Santos Pires
 
 
