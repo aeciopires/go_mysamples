@@ -37,6 +37,7 @@ Tutorials and documentation about **Go** language:
 
 * http://aprendago.com
 * https://golang.org/doc
+* https://golangr.com
 * https://www.geeksforgeeks.org/golang/?ref=lbp
 * https://astaxie.gitbooks.io/build-web-application-with-golang/content/pt-br/
 * https://medium.com/@denis_santos/primeiros-passos-com-golang-c3368f6d707a
