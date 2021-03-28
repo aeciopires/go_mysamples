@@ -34,7 +34,11 @@ func main() {
 		name: "Aecio",
 		surname: "Pires",
 	}
-	changeMe(&son,"dos Santos")
+	fmt.Println("Before...")
+	fmt.Println("My name is: ", son)
 
+	changeMe(&son,"dos Santos")
+	
+	fmt.Println("After...")
 	fmt.Println("My name is: ", son)
 }
