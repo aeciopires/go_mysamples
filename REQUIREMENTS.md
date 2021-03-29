@@ -59,24 +59,31 @@ For more information about Docker Compose visit:
 Install Go with the follow commands.
 
 ```bash
-VERSION=1.15
+VERSION=1.16.2
 
 mkdir -p $HOME/go/bin
 
+cd /tmp
+
 curl https://dl.google.com/go/go$VERSION.linux-amd64.tar.gz -o go.tar.gz
 
+sudo rm -rf /usr/local/go 
 sudo tar -C /usr/local -xzf go.tar.gz
+
+rm /tmp/go.tar.gz
 
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 go version
 
-echo "export GOPATH=$HOME/go" >> ~/.bashrc
-echo "export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin" >> ~/.bashrc
+echo "export GOPATH=$HOME/go" >> /etc/environment
+echo "export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin" >> /etc/environment
+source /etc/environment
 ```
 
 For more information about Go visit:
 
+* https://golang.org/doc/install#install
 * https://golang.org/doc
 * http://aprendago.com

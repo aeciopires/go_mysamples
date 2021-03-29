@@ -38,6 +38,9 @@ Tutorials and documentation about **Go** language:
 * http://aprendago.com
 * https://golang.org/doc
 * https://golangr.com
+* https://go.dev
+* https://pkg.go.dev
+* https://learn.go.dev
 * https://www.geeksforgeeks.org/golang/?ref=lbp
 * https://astaxie.gitbooks.io/build-web-application-with-golang/content/pt-br/
 * https://medium.com/@denis_santos/primeiros-passos-com-golang-c3368f6d707a
@@ -68,6 +71,8 @@ Tutorials and documentation about **Go** language:
 * https://dzone.com/articles/golang-tutorial-learn-golang-by-examples
 * https://dzone.com/articles/structure-of-a-go-program 
 * https://gobyexample.com/
+* https://gowebexamples.com
+* https://mholt.github.io/json-to-go/
 * https://awesome-go.com/
 * https://research.swtch.com/
 * https://levelup.gitconnected.com/get-a-taste-of-concurrency-in-go-625e4301810f
