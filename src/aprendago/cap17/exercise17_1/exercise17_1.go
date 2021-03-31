@@ -30,64 +30,34 @@ import (
 )
 
 type user struct {
-first string
-age   int
+	First string
+	Age   int
 }
 
 func main() {
 	u1 := user{
-		first: "James",
-		age:   32,
+		First: "James",
+		Age:   32,
 	}
 
 	u2 := user{
-		first: "Moneypenny",
-		age:   27,
+		First: "Moneypenny",
+		Age:   27,
 	}
 
 	u3 := user{
-		first: "M",
-		age:   54,
+		First: "M",
+		Age:   54,
 	}
 
 	users := []user{u1, u2, u3}
 
-	fmt.Println(users)
+	fmt.Println("In structs: ", users)
 
-	// your code goes here
-}
-
-//-----
-
-type client struct {
-	Name string `json:"name"` // Essa terceira coluna é uma tag para converter Name para name no JSON
-	Id   string `json:"id"`   // Essa terceira coluna é uma tag para converter ID para id no JSON
-	Poc  bool   `json:"poc"`  // Essa terceira coluna é uma tag para converter Poc para poc no JSON
-}
-
-func main() {
-	aecio := client{
-		Name: "Aecio",
-		Id:   "8j4rf",
-		Poc:  false,
-	}
-
-	pires := client{
-		Name: "Pires",
-		Id:   "rf8j4",
-		Poc:  true,
-	}
-
-	jsonAecio, err := json.Marshal(aecio)
+	jsonResult, err := json.Marshal(users)
 	if err != nil {
 		fmt.Println("[ERROR]: ", err)
 	}
 
-	jsonPires, err := json.Marshal(pires)
-	if err != nil {
-		fmt.Println("[ERROR]: ", err)
-	}
-
-	fmt.Println(string(jsonAecio))
-	fmt.Println(string(jsonPires))
+	fmt.Println("JSON: ", string(jsonResult))
 }

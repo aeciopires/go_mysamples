@@ -6,6 +6,7 @@ import (
 
 // Typed const
 const x int = 20
+
 // Untyped const
 const y = 10
 

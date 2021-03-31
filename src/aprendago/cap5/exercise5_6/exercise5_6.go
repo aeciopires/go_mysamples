@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	_    = iota + 2020
+	_ = iota + 2020
 	year1
 	year2
 	year3

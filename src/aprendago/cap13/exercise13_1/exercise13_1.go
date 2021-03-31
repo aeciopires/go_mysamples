@@ -1,4 +1,4 @@
-package	main
+package main
 
 import (
 	"fmt"
@@ -7,17 +7,17 @@ import (
 
 //func (receiver) identifier(parameters) (returns) { code }
 
-func returnNumberInteger() int{
+func returnNumberInteger() int {
 	return rand.Intn(100)
 }
 
-func returnNumberIntegerString() (int, string){
+func returnNumberIntegerString() (int, string) {
 	number := returnNumberInteger()
 	word := "Congratulations by X years old."
 	return number, word
 }
 
-func main(){
+func main() {
 	fmt.Println(returnNumberInteger())
 	fmt.Println(returnNumberIntegerString())
 }

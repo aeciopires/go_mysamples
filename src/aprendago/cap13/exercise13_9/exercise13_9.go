@@ -15,7 +15,7 @@ func sum() {
 	for aux, number := range numbers {
 		fmt.Print(number)
 		total += number
-		if aux < (len(numbers)-1){
+		if aux < (len(numbers) - 1) {
 			fmt.Print(" + ")
 		}
 	}

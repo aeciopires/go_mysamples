@@ -15,7 +15,7 @@ func main() {
 	for _, v := range s {
 		fmt.Printf("%b - %v - %T - %#U - %#x\n", v, v, v, v, v)
 	}
-	
+
 	fmt.Println("")
 
 	// Array of bytes (byte to byte) to print: bits, position ascii, type, position and character ascii, hexa representation

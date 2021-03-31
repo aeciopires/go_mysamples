@@ -25,8 +25,8 @@ OBS.: Os structs que serão exportados para JSON precisam começar com letra mai
 package main
 
 import (
-	"fmt"
 	"encoding/json"
+	"fmt"
 )
 
 type client struct {
@@ -50,12 +50,12 @@ func main() {
 
 	jsonAecio, err := json.Marshal(aecio)
 	if err != nil {
-		fmt.Println("[ERROR]: ",err)
+		fmt.Println("[ERROR]: ", err)
 	}
 
 	jsonPires, err := json.Marshal(pires)
 	if err != nil {
-		fmt.Println("[ERROR]: ",err)
+		fmt.Println("[ERROR]: ", err)
 	}
 
 	fmt.Println(string(jsonAecio))

@@ -27,7 +27,7 @@ func main() {
 
 	for _, value := range student {
 		fmt.Println("My name is ", value.name, " and my favorite flavors are: ")
-		for _, value := range value.icecreamFlavor{
+		for _, value := range value.icecreamFlavor {
 			fmt.Println("\t -", value)
 		}
 	}

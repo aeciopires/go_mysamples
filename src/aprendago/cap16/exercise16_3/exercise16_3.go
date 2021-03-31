@@ -25,8 +25,8 @@ OBS.: Os structs que serão exportados para JSON precisam começar com letra mai
 package main
 
 import (
-	"fmt"
 	"encoding/json"
+	"fmt"
 )
 
 type client struct {
@@ -41,7 +41,7 @@ func main() {
 	var aecio client
 	err := json.Unmarshal(sliceBytes, &aecio)
 	if err != nil {
-		fmt.Println("[ERROR]: ",err)
+		fmt.Println("[ERROR]: ", err)
 	}
 
 	fmt.Println(aecio)
