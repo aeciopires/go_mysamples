@@ -31,7 +31,7 @@ import (
 
 type user struct {
 first string
-	age   int
+age   int
 }
 
 func main() {
