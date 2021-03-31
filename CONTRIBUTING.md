@@ -35,8 +35,8 @@ git clone git@github.com:aeciopires/go_mysamples.git
 
 ```bash
 cd go_mysamples
-ln -sf scripts/pre-commit.sh .git/hooks/pre-commit
-ln -sf scripts/pre-commit.sh .git/hooks/pre-push
+ln -sf $(pwd)/scripts/pre-commit.sh .git/hooks/pre-commit
+ln -sf $(pwd)/scripts/pre-commit.sh .git/hooks/pre-push
 ```
 
 * Create a branch using the following command:
