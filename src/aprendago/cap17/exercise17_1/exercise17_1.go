@@ -1,0 +1,93 @@
+/*
+Aulas sobre aplicações com JSON:
+https://www.youtube.com/watch?v=-tU2PSY8F5w&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=113
+https://www.youtube.com/watch?v=-tU2PSY8F5w&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=114
+https://www.youtube.com/watch?v=-tU2PSY8F5w&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=115
+https://www.youtube.com/watch?v=-tU2PSY8F5w&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=116
+https://www.youtube.com/watch?v=-tU2PSY8F5w&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=117
+https://www.youtube.com/watch?v=-tU2PSY8F5w&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=118
+https://www.youtube.com/watch?v=-tU2PSY8F5w&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=119
+https://www.youtube.com/watch?v=-tU2PSY8F5w&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=120
+https://www.youtube.com/watch?v=-tU2PSY8F5w&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=121
+https://www.youtube.com/watch?v=-tU2PSY8F5w&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=122
+https://www.youtube.com/watch?v=-tU2PSY8F5w&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=123
+https://www.youtube.com/watch?v=-tU2PSY8F5w&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=124
+
+OBS.: Os structs que serão exportados para JSON precisam começar com letra maiúscula para serem visíveis às funções que os manipularão, caso contrário não funcionará corretamente conforme explicado nesta aula.
+ https://www.youtube.com/watch?v=-tU2PSY8F5w&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=114
+ https://stackoverflow.com/a/21825458/8507770
+ https://narkive.com/8BNGRCKN.2
+ https://stackoverflow.com/questions/43444248/why-is-the-format-string-of-struct-field-always-lower-case
+ https://eager.io/blog/go-and-json/
+ https://gobyexample.com/json
+*/
+
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type user struct {
+first string
+	age   int
+}
+
+func main() {
+	u1 := user{
+		first: "James",
+		age:   32,
+	}
+
+	u2 := user{
+		first: "Moneypenny",
+		age:   27,
+	}
+
+	u3 := user{
+		first: "M",
+		age:   54,
+	}
+
+	users := []user{u1, u2, u3}
+
+	fmt.Println(users)
+
+	// your code goes here
+}
+
+//-----
+
+type client struct {
+	Name string `json:"name"` // Essa terceira coluna é uma tag para converter Name para name no JSON
+	Id   string `json:"id"`   // Essa terceira coluna é uma tag para converter ID para id no JSON
+	Poc  bool   `json:"poc"`  // Essa terceira coluna é uma tag para converter Poc para poc no JSON
+}
+
+func main() {
+	aecio := client{
+		Name: "Aecio",
+		Id:   "8j4rf",
+		Poc:  false,
+	}
+
+	pires := client{
+		Name: "Pires",
+		Id:   "rf8j4",
+		Poc:  true,
+	}
+
+	jsonAecio, err := json.Marshal(aecio)
+	if err != nil {
+		fmt.Println("[ERROR]: ", err)
+	}
+
+	jsonPires, err := json.Marshal(pires)
+	if err != nil {
+		fmt.Println("[ERROR]: ", err)
+	}
+
+	fmt.Println(string(jsonAecio))
+	fmt.Println(string(jsonPires))
+}

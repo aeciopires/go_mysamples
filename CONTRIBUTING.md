@@ -31,6 +31,14 @@ When someone wants to contribute to improvements in this repository, the followi
 git clone git@github.com:aeciopires/go_mysamples.git
 ```
 
+* Create the follow symbolic links (do this every time you clone the repository).
+
+```bash
+cd go_mysamples
+ln -sf scripts/pre-commit.sh .git/hooks/pre-commit
+ln -sf scripts/pre-commit.sh .git/hooks/pre-push
+```
+
 * Create a branch using the following command:
 
 ```bash
