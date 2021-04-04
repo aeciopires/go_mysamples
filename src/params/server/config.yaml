@@ -1,0 +1,10 @@
+server:
+  port: ":8080"
+  http:
+    enabled: true
+  https:
+    enabled: false
+
+SERVER_PORT: ":8081"
+SERVER_HTTP_ENABLED: true
+SERVER_HTTPS_ENABLED: false
