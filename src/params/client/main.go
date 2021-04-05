@@ -90,6 +90,21 @@ func getVariableString(envConfig string, paramConfig string, defaultValue string
 	}
 }
 
+func getVariableBool(envConfig string, paramConfig string, defaultValue bool) bool {
+	aux := viper.GetBool(envConfig)
+	if &aux == nil {
+		aux = viper.GetBool(paramConfig)
+		if &aux == nil {
+			// Set undefined variables
+			return defaultValue
+		} else {
+			return viper.GetBool(paramConfig)
+		}
+	} else {
+		return viper.GetBool(envConfig)
+	}
+}
+
 func main() {
 
 	//------------- BEGIN-VARIABLES -------------
