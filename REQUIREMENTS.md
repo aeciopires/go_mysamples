@@ -59,7 +59,7 @@ For more information about Docker Compose visit:
 Install Go with the follow commands.
 
 ```bash
-VERSION=1.16.2
+VERSION=1.16.3
 
 mkdir -p $HOME/go/bin
 
@@ -77,8 +77,8 @@ export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 go version
 
-echo "export GOPATH=$HOME/go" >> /etc/environment
-echo "export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin" >> /etc/environment
+sudo echo "GOPATH=\$HOME/go" >> /etc/environment
+sudo echo "PATH=\$PATH:/usr/local/go/bin:\$GOPATH/bin" >> /etc/environment
 source /etc/environment
 ```
 
