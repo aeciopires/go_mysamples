@@ -58,6 +58,19 @@ func (srv server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(fmt.Sprintf("%s Uploaded!", uploadedFileHeader.Filename)))
 }
 
+func getVariableString(envConfig string, paramConfig string, defaultValue string) string {
+	if viper.GetString(envConfig) == "" {
+		if viper.GetString(paramConfig) == "" {
+			// Set undefined variables
+			return defaultValue
+		} else {
+			return viper.GetString(paramConfig)
+		}
+	} else {
+		return viper.GetString(envConfig)
+	}
+}
+
 func main() {
 
 	//------------- BEGIN-VARIABLES -------------
@@ -77,14 +90,7 @@ func main() {
 		log.Fatalf("[ERROR] Error while reading config file %s", err)
 	}
 
-	listen := viper.GetString("SERVER_PORT")
-	if listen == "" {
-		listen = viper.GetString("server.port")
-		if listen == "" {
-			// Set undefined variables
-			listen = "localhost:9000"
-		}
-	}
+	listen := getVariableString("SERVER_PORT", "server.port", "localhost:9000")
 
 	fmt.Println("[DEBUG] server.port:\t", listen)
 	//------------- END-VARIABLES -------------

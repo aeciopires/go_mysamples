@@ -77,6 +77,19 @@ func postFileAndReturnResponse(site string, filename string) string {
 	return string(data)
 }
 
+func getVariableString(envConfig string, paramConfig string, defaultValue string) string {
+	if viper.GetString(envConfig) == "" {
+		if viper.GetString(paramConfig) == "" {
+			// Set undefined variables
+			return defaultValue
+		} else {
+			return viper.GetString(paramConfig)
+		}
+	} else {
+		return viper.GetString(envConfig)
+	}
+}
+
 func main() {
 
 	//------------- BEGIN-VARIABLES -------------
@@ -96,37 +109,13 @@ func main() {
 		log.Fatalf("[ERROR] Error while reading config file %s", err)
 	}
 
-	protocol := viper.GetString("SITE_PROTOCOL")
-	if protocol == "" {
-		protocol = viper.GetString("site.protocol")
-		if protocol == "" {
-			// Set undefined variables
-			protocol = "http"
-		}
-	}
-
-	siteAddress := viper.GetString("SITE_ADDRESS")
-	if siteAddress == "" {
-		siteAddress = viper.GetString("site.address")
-		if siteAddress == "" {
-			// Set undefined variables
-			siteAddress = "localhost:9000"
-		}
-	}
-
+	protocol := getVariableString("SITE_PROTOCOL", "site.protocol", "http")
+	siteAddress := getVariableString("SITE_ADDRESS", "site.address", "localhost:9000")
+	myFile := getVariableString("UPLOAD_FILE", "upload.file", "test3.txt")
 	siteURL := protocol + "://" + siteAddress
 
-	myFile := viper.GetString("UPLOAD_FILE")
-	if myFile == "" {
-		myFile = viper.GetString("upload.file")
-		if myFile == "" {
-			// Set undefined variables
-			myFile = "test3.txt"
-		}
-	}
-
-	fmt.Println("[DEBUG] siteURL:\t", siteURL)
-	fmt.Println("[DEBUG] myFile:\t", myFile)
+	fmt.Println("[DEBUG] siteURL: ", siteURL)
+	fmt.Println("[DEBUG] myFile:  ", myFile)
 	//------------- END-VARIABLES -------------
 
 	data := postFileAndReturnResponse(siteURL, myFile)
