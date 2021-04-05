@@ -1,7 +1,19 @@
 /*
 	References:
+	* https://medium.com/@bnprashanth256/reading-configuration-files-and-environment-variables-in-go-golang-c2607f912b63
+	* https://github.com/BNPrashanth/go-poc-bp/tree/env-var-approach1/src
+	* https://schadokar.dev/posts/use-environment-variable-in-your-next-golang-project/
 	* https://towardsdatascience.com/use-environment-variable-in-your-next-golang-project-39e17c3aaa66
 	* https://github.com/spf13/viper
+
+	Viper uses the following precedence order. Each item takes precedence over the item below it:
+
+	* explicit call to Set
+	* flag
+	* env
+	* config
+	* key/value store
+	* default
 
 	Install requirements:
 	cd server
@@ -22,19 +34,6 @@ import (
 )
 
 type server struct{}
-
-// Configurations exported
-type Configurations struct {
-	Server               ServerConfigurations
-	SERVER_PORT          string
-	SERVER_HTTP_ENABLED  bool
-	SERVER_HTTPS_ENABLED bool
-}
-
-// ServerConfigurations exported
-type ServerConfigurations struct {
-	Port string
-}
 
 func (srv server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	formName := "myFile"
@@ -72,22 +71,15 @@ func main() {
 	// Enable VIPER to read Environment Variables
 	viper.AutomaticEnv()
 
-	var configuration Configurations
-
 	// Find and read the config file
 	err := viper.ReadInConfig()
 	if err != nil {
 		log.Fatalf("[ERROR] Error while reading config file %s", err)
 	}
 
-	err2 := viper.Unmarshal(&configuration)
-	if err2 != nil {
-		fmt.Printf("[ERROR] Unable to decode into struct, %v", err2)
-	}
-
-	listen := viper.GetString("server.port")
+	listen := viper.GetString("SERVER_PORT")
 	if listen == "" {
-		listen = viper.GetString("SERVER_PORT")
+		listen = viper.GetString("server.port")
 		if listen == "" {
 			// Set undefined variables
 			listen = "localhost:9000"

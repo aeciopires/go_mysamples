@@ -1,9 +1,9 @@
 site:
   address: "localhost:8080"
-  protocol: "http"
+  protocol: "https"
 upload:
-  file: "test.txt"
+  file: "test2.txt"
 
-#SITE_ADDRESS: "localhost:8081"
-#SITE_PROTOCOL: "https"
-#UPLOAD_FILE: "test2.txt"
+SITE_ADDRESS: "localhost:8081"
+SITE_PROTOCOL: "http"
+UPLOAD_FILE: "test.txt"

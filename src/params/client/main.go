@@ -1,5 +1,8 @@
 /*
 	References:
+	* https://medium.com/@bnprashanth256/reading-configuration-files-and-environment-variables-in-go-golang-c2607f912b63
+	* https://github.com/BNPrashanth/go-poc-bp/tree/env-var-approach1/src
+	* https://schadokar.dev/posts/use-environment-variable-in-your-next-golang-project/
 	* https://towardsdatascience.com/use-environment-variable-in-your-next-golang-project-39e17c3aaa66
 	* https://github.com/spf13/viper
 
@@ -32,23 +35,6 @@ import (
 
 	"github.com/spf13/viper"
 )
-
-// Configurations exported
-type Configurations struct {
-	Site   ServerConfigurations
-	Upload UploadConfigurations
-}
-
-// ServerConfigurations exported
-type ServerConfigurations struct {
-	Address  string
-	Protocol string
-}
-
-// UploadConfigurations exported
-type UploadConfigurations struct {
-	File string
-}
 
 func postFileAndReturnResponse(site string, filename string) string {
 	fileDataBuffer := bytes.Buffer{}
@@ -104,31 +90,24 @@ func main() {
 	// Enable VIPER to read Environment Variables
 	viper.AutomaticEnv()
 
-	var configuration Configurations
-
 	// Find and read the config file
 	err := viper.ReadInConfig()
 	if err != nil {
 		log.Fatalf("[ERROR] Error while reading config file %s", err)
 	}
 
-	err2 := viper.Unmarshal(&configuration)
-	if err2 != nil {
-		fmt.Printf("[ERROR] Unable to decode into struct, %v", err2)
-	}
-
-	protocol := viper.GetString("site.protocol")
+	protocol := viper.GetString("SITE_PROTOCOL")
 	if protocol == "" {
-		protocol = viper.GetString("SITE_PROTOCOL")
+		protocol = viper.GetString("site.protocol")
 		if protocol == "" {
 			// Set undefined variables
 			protocol = "http"
 		}
 	}
 
-	siteAddress := viper.GetString("site.address")
+	siteAddress := viper.GetString("SITE_ADDRESS")
 	if siteAddress == "" {
-		siteAddress = viper.GetString("SITE_ADDRESS")
+		siteAddress = viper.GetString("site.address")
 		if siteAddress == "" {
 			// Set undefined variables
 			siteAddress = "localhost:9000"
@@ -137,9 +116,9 @@ func main() {
 
 	siteURL := protocol + "://" + siteAddress
 
-	myFile := viper.GetString("upload.file")
+	myFile := viper.GetString("UPLOAD_FILE")
 	if myFile == "" {
-		myFile = viper.GetString("UPLOAD_FILE")
+		myFile = viper.GetString("upload.file")
 		if myFile == "" {
 			// Set undefined variables
 			myFile = "test3.txt"
