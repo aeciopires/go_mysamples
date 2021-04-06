@@ -77,9 +77,8 @@ export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 go version
 
-sudo echo "GOPATH=\$HOME/go" >> /etc/environment
-sudo echo "PATH=\$PATH:/usr/local/go/bin:\$GOPATH/bin" >> /etc/environment
-source /etc/environment
+echo "GOPATH=$HOME/go" >> ~/.bashrc
+echo "PATH=\$PATH:/usr/local/go/bin:\$GOPATH/bin" >> ~/.bashrc
 ```
 
 For more information about Go visit:
