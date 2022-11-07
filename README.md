@@ -90,7 +90,7 @@ git clone https://github.com/aeciopires/go_mysamples
 
 cd go_mysamples/src/helloworld
 
-VERSION=1.15-alpine
+VERSION=1.19-alpine
 GO_WORKSPACE=/usr/local/go/src
 docker run --rm -v $GO_WORKSPACE/:/go/src/ -v "$PWD":/usr/src/myapp -w /usr/src/myapp golang:$VERSION go build -v
 
@@ -127,6 +127,4 @@ mail: http://blog.aeciopires.com/contato
 
 ## License
 
-GPL-3.0 2021 Aécio dos Santos Pires
-
-
+GPL-3.0 2022 Aécio dos Santos Pires

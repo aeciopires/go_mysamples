@@ -59,7 +59,7 @@ For more information about Docker Compose visit:
 Install Go with the follow commands.
 
 ```bash
-VERSION=1.17.5
+VERSION=1.19.3
 
 mkdir -p $HOME/go/bin $HOME/go/pkg $HOME/go/src
 
