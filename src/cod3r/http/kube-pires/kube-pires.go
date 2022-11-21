@@ -1,12 +1,13 @@
 package main
 
 import (
+	"embed"
 	"fmt"
-	"html/template"
 	"log"
 	"net"
 	"net/http"
 	"os"
+	"text/template"
 )
 
 // References:
@@ -24,16 +25,30 @@ import (
 // https://stackoverflow.com/questions/61057271/how-to-run-html-with-css-using-golang
 // https://stackoverflow.com/questions/28793619/golang-what-to-use-http-servefile-or-http-fileserver/28798174#28798174
 // https://www.tumblr.com/golang-examples/99458329439/get-local-ip-addresses
+// https://pkg.go.dev/embed
+// https://charly3pins.dev/blog/learn-how-to-use-the-embed-package-in-go-by-building-a-web-page-easily/
 
-var returnCodeError bool = false
-var cssDir string = "html/css"
-var htmlFile string = "html/index.html"
+const (
+	htmlExtension = "templates/*.html"
+)
 
-type Context struct {
-	Title     string
-	Hostname  string
-	Addresses map[string]string
-}
+var (
+	// Embed static content for using with web server.
+	//
+	//go:embed templates/*
+	filesEmbed embed.FS
+
+	returnCodeError bool   = false
+	cssDir          string = "css"
+)
+
+type (
+	Content struct {
+		Title     string
+		Hostname  string
+		Addresses map[string]string
+	}
+)
 
 // Show status of application
 func status(w http.ResponseWriter, req *http.Request) {
@@ -95,18 +110,21 @@ func parseTemplate(w http.ResponseWriter, req *http.Request) {
 	}
 
 	// Loading the HTML template
-	parsedTemplate := template.Must(template.ParseFiles(htmlFile))
+	parsedTemplate := template.Must(
+		template.New("htmlFiles").
+			ParseFS(filesEmbed, "templates/*"),
+	)
 
-	context := Context{
+	content := Content{
 		Title:     "kube-pires",
 		Hostname:  hostname(),
 		Addresses: getAddress(),
 	}
 
-	errTemplate := parsedTemplate.Execute(w, context)
+	errTemplate := parsedTemplate.ExecuteTemplate(w, "index.html", content)
 
 	if errTemplate != nil {
-		log.Println("Error executing template :", errTemplate)
+		log.Println("[ERROR] Executing template :", errTemplate)
 		return
 	}
 }
@@ -119,6 +137,7 @@ func main() {
 	address := listen + ":" + port
 
 	// HTTP Handlers
+	// Exposing CSS files without embed directive
 	fs := http.FileServer(http.Dir(cssDir))
 	http.Handle("/css/", http.StripPrefix("/css", fs))
 	http.HandleFunc("/", parseTemplate)
