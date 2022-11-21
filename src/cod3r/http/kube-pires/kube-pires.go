@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html/template"
 	"log"
+	"net"
 	"net/http"
 	"os"
 )
@@ -29,8 +30,9 @@ var cssDir string = "html/css"
 var htmlFile string = "html/index.html"
 
 type Context struct {
-	Title    string
-	Hostname string
+	Title     string
+	Hostname  string
+	Addresses map[string]string
 }
 
 // Show status of application
@@ -49,11 +51,45 @@ func headers(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
-func hostname(w http.ResponseWriter, req *http.Request) {
-	hostname, err := os.Hostname()
+// Get hostname
+func hostname() (name string) {
+
+	name, err := os.Hostname()
+
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	return
+}
+
+// Get interface name and IPAddress
+func getAddress() (address map[string]string) {
+
+	address = make(map[string]string)
+
+	listIfaces, err := net.Interfaces()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, iface := range listIfaces {
+		addrs, err := iface.Addrs()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		if addrs != nil {
+			address[iface.Name] = addrs[0].String()
+		}
+	}
+
+	return
+}
+
+// Parse of HTML content
+func parseTemplate(w http.ResponseWriter, req *http.Request) {
+
 	if returnCodeError {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
@@ -62,8 +98,9 @@ func hostname(w http.ResponseWriter, req *http.Request) {
 	parsedTemplate := template.Must(template.ParseFiles(htmlFile))
 
 	context := Context{
-		Title:    "kube-pires",
-		Hostname: hostname,
+		Title:     "kube-pires",
+		Hostname:  hostname(),
+		Addresses: getAddress(),
 	}
 
 	errTemplate := parsedTemplate.Execute(w, context)
@@ -74,27 +111,8 @@ func hostname(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
-/*
-  // Code for get interface name and IPAddress
-	list, err := net.Interfaces()
-	if err != nil {
-		panic(err)
-	}
-	for i, iface := range list {
-		fmt.Printf("%d ifaceName=%s \n", i, iface.Name)
-
-		addrs, err := iface.Addrs()
-		if err != nil {
-			panic(err)
-		}
-
-		for j, addr := range addrs {
-			fmt.Printf(" %d %v\n", j, addr)
-		}
-	}
-*/
-
 func main() {
+
 	// Variables
 	listen := "0.0.0.0"
 	port := "3000"
@@ -102,8 +120,8 @@ func main() {
 
 	// HTTP Handlers
 	fs := http.FileServer(http.Dir(cssDir))
-	http.Handle("/css/", http.StripPrefix("/css", fs))
-	http.HandleFunc("/", hostname)
+	http.Handle("/css", http.StripPrefix("/css", fs))
+	http.HandleFunc("/", parseTemplate)
 	http.HandleFunc("/headers", headers)
 	http.HandleFunc("/health", status)
 

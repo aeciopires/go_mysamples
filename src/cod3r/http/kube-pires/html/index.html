@@ -14,7 +14,11 @@
 <div id="info">
   <table>
     <tr>
-      <h3>Hostname: {{.Hostname}}.</h3>
+      <h3>Hostname: {{.Hostname}}</h3>
+      <h4>Interfaces and IPAddress:</h4>
+      {{ range $key, $value := .Addresses }}
+        <h5>{{ $key }}: {{ $value }}</h5>
+      {{ end }}
     </tr>
   </table>
 </div>
