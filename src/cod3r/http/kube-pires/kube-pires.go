@@ -120,7 +120,7 @@ func main() {
 
 	// HTTP Handlers
 	fs := http.FileServer(http.Dir(cssDir))
-	http.Handle("/css", http.StripPrefix("/css", fs))
+	http.Handle("/css/", http.StripPrefix("/css", fs))
 	http.HandleFunc("/", parseTemplate)
 	http.HandleFunc("/headers", headers)
 	http.HandleFunc("/health", status)
