@@ -1,7 +1,7 @@
 <!-- TOC -->
 
 - [Requirements](#requirements)
-  - [General Packages](#general-packages)
+- [General Packages](#general-packages)
 - [Docker](#docker)
 - [Go](#go)
 
@@ -9,31 +9,21 @@
 
 # Requirements
 
-## General Packages
+# General Packages
 
 Install the follow packages.
 
-Debian/Ubuntu:
-
-```bash
-sudo apt-get install -y git curl vim
-```
-
-CentOS:
-
-```bash
-sudo yum install -y git curl vim
-```
+* git
+* curl
+* vim
 
 # Docker
 
-Install Docker CE (Community Edition) following the instructions of pages.
+Install Docker following the instructions of pages.
 
-CentOS: https://docs.docker.com/install/linux/docker-ce/centos/
-
-Debian: https://docs.docker.com/install/linux/docker-ce/debian/
-
-Ubuntu Server: https://docs.docker.com/install/linux/docker-ce/ubuntu/
+* CentOS: https://docs.docker.com/engine/install/centos/
+* Debian: https://docs.docker.com/engine/install/debian/
+* Ubuntu: https://docs.docker.com/engine/install/ubuntu/
 
 Save the Docker service, configure the Docker to boot at the operating system and add the user to the Docker group.
 
@@ -59,17 +49,15 @@ For more information about Docker Compose visit:
 Install Go with the follow commands.
 
 ```bash
-VERSION=1.19.3
+VERSION=1.19.5
 
-mkdir -p $HOME/go/bin $HOME/go/pkg $HOME/go/src
+mkdir -p $HOME/go/bin
 
 cd /tmp
-
-curl https://dl.google.com/go/go$VERSION.linux-amd64.tar.gz -o go.tar.gz
+curl -L https://go.dev/dl/go$VERSION.linux-amd64.tar.gz -o go.tar.gz
 
 sudo rm -rf /usr/local/go 
 sudo tar -C /usr/local -xzf go.tar.gz
-
 rm /tmp/go.tar.gz
 
 export GOPATH=$HOME/go
