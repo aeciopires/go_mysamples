@@ -26,6 +26,9 @@ Usage:
 Credit:
 --------------------------------
 	Generated using Google Gemini, ChatGPT and GitHub Copilot
+	HTML and CSS templates:
+	https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_searchbar3
+	https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_fixed_footer
 
 External packages:
 --------------------------------
@@ -46,16 +49,16 @@ Creating the index.tmpl file:
 <!DOCTYPE html>
 <html lang="en">
 <head>
-		<meta charset="UTF-8">
-		<title>Files in {{.Dir}}</title>
+    <meta charset="UTF-8">
+    <title>Files in {{.Dir}}</title>
 </head>
 <body>
-		<h1>Files in {{.Dir}}</h1>
-		<ul>
-				{{range $index, $link := .Links}}
-				<li><a href="{{$link}}">{{index $.Filenames $index}}</a></li>
-				{{end}}
-		</ul>
+    <h1>Files in {{.Dir}}</h1>
+    <ul>
+        {{range $index, $link := .Links}}
+        <li><a href="{{$link}}">{{index $.Filenames $index}}</a></li>
+        {{end}}
+    </ul>
 </body>
 </html>
 ```
@@ -94,6 +97,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"strings"
 
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
@@ -176,6 +180,25 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		http.Error(w, "Error listing files", http.StatusInternalServerError)
 		return
+	}
+
+	// Filter files based on the search query.
+	query := strings.ToLower(r.URL.Query().Get("search"))
+	// Create a list of files that match the search query.
+	var filteredFiles []FileData
+	// If the search query is not empty, filter the files.
+	if query != "" {
+		// Iterate over the files and add the ones that match the search query to the filteredFiles list.
+		for _, file := range files {
+			// Check if the filename contains the search query (case-insensitive).
+			if strings.Contains(strings.ToLower(extractFilename(file.Path)), query) {
+				// If it does, add the file to the filteredFiles list.
+				filteredFiles = append(filteredFiles, file)
+			}
+		}
+	} else {
+		// If the search query is empty, use the original list of files.
+		filteredFiles = files
 	}
 
 	// Create a list of links to download the files.
