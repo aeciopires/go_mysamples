@@ -127,4 +127,4 @@ mail: http://blog.aeciopires.com/contato
 
 ## License
 
-GPL-3.0 2023 Aécio dos Santos Pires
+GPL-3.0 2024 Aécio dos Santos Pires
