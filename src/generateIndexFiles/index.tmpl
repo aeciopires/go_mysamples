@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <title>Files in {{.Dir}}</title>
 </head>
 <body>
     <h1>Files in {{.Dir}}</h1>
     <ul>
-        {{range .Files}}
-        <li>{{.Path}}</li>
+        {{range $index, $link := .Links}}
+        <li><a href="{{$link}}">{{index $.Filenames $index}}</a></li>
         {{end}}
     </ul>
 </body>
