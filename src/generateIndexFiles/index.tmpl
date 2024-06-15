@@ -4,20 +4,32 @@
 
     <script>
         function filterFiles() {
-            var input, filter, ul, li, a, i, txtValue;
+            var input, filter, fileItems, i, txtValue;
             input = document.getElementById('searchInput');
             filter = input.value.toLowerCase();
-            ul = document.getElementById("fileList");
-            li = ul.getElementsByTagName('li');
+            fileItems = document.getElementsByClassName('file-item');
 
-            for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("a")[0];
-                txtValue = a.textContent || a.innerText;
+            for (i = 0; i < fileItems.length; i++) {
+                txtValue = fileItems[i].textContent || fileItems[i].innerText;
                 if (txtValue.toLowerCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
+                    fileItems[i].style.display = "";
                 } else {
-                    li[i].style.display = "none";
+                    fileItems[i].style.display = "none";
                 }
+            }
+
+            var directories = document.getElementsByClassName('directory');
+            for (i = 0; i < directories.length; i++) {
+                var hasVisibleFiles = false;
+                var sibling = directories[i].nextElementSibling;
+                while (sibling && sibling.classList.contains('file-item')) {
+                    if (sibling.style.display !== 'none') {
+                        hasVisibleFiles = true;
+                        break;
+                    }
+                    sibling = sibling.nextElementSibling;
+                }
+                directories[i].style.display = hasVisibleFiles ? "" : "none";
             }
         }
     </script>
@@ -99,6 +111,45 @@
       }
     }
 
+    .icon {
+        width: 20px;
+        height: 20px;
+        margin-left: 8px;
+        vertical-align: middle;
+    }
+    .directory {
+        font-weight: bold;
+        margin-top: 10px;
+        margin-left: 8px;
+    }
+    .file-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: left;
+        padding: 5px 0;
+    }
+    .file-item:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    .file-info {
+        flex: 1;
+        text-align: left;
+    }
+    .file-name {
+        flex: 6;
+        text-align: left;
+        margin-left: -10%;
+    }
+    .file-size {
+        flex: 1;
+        text-align: right;
+    }
+    .file-modtime {
+        flex: 1;
+        text-align: right;
+        margin-right: 20px;
+    }
+
     .footer {
       position: fixed;
       left: 0;
@@ -124,11 +175,26 @@
     </div>
 
     <h1>Files in {{.Dir}}</h1>
-    <ul id="fileList">
-        {{range $index, $element := .Links}}
-        <li><a href="{{$element}}">{{index $.Filenames $index}}</a></li>
+    <div id="fileList">
+        {{range $dir, $files := .GroupedFiles}}
+        <div class="directory">
+            <img src="images/folder_icon.png" class="icon">
+            {{$dir}}
+        </div>
+        {{range $files}}
+        <div class="file-item">
+            <div class="file-info">
+                <img src="{{if .IsDir}}images/folder_icon.png{{else}}images/file_icon.png{{end}}" class="icon">
+            </div>
+            <div class="file-name">
+                <a href="{{.Link}}">{{.Name}}</a>
+            </div>
+            <div class="file-size">{{.Size}} bytes</div>
+            <div class="file-modtime">{{.ModTime.Format "2006-01-02 15:04:05"}}</div>
+        </div>
         {{end}}
-    </ul>
+        {{end}}
+    </div>
 
     <div class="footer">
         <p>Created by Aécio Pires using AI services (Github Copilot, ChatGPT, Gemini)</p>

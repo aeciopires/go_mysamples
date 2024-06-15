@@ -97,7 +97,9 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"sort"
 	"strings"
+	"time"
 
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
@@ -105,7 +107,12 @@ import (
 
 // FileData holds information about a file.
 type FileData struct {
-	Path string
+	Path    string
+	Name    string
+	Link    string
+	IsDir   bool
+	ModTime time.Time
+	Size    int64
 }
 
 // extractFilename extracts the filename from a URL link.
@@ -131,9 +138,17 @@ func listFiles(dir string) ([]FileData, error) {
 		if err != nil {
 			return err
 		}
-		// If the path is not a directory, append it to the files list.
-		if !info.IsDir() {
-			files = append(files, FileData{Path: path})
+		// Skip the directory itself.
+		if path != dir {
+			// Add the file to the list of files.
+			files = append(files, FileData{
+				Path:    path,
+				Name:    info.Name(),
+				Link:    fmt.Sprintf("/download-symlink?path=%s", path),
+				IsDir:   info.IsDir(),
+				ModTime: info.ModTime(),
+				Size:    info.Size(),
+			})
 		}
 		return nil
 	})
@@ -154,13 +169,30 @@ func getIndexTemplate() (*template.Template, error) {
 		return nil, err
 	}
 
-	// Define a FuncMap with the extractFilename function.
+	// Define a FuncMap to register custom functions for use in the template.
 	funcMap := template.FuncMap{
 		"extractFilename": extractFilename,
+		"formatDate": func(t time.Time) string {
+			return t.Format("2006-01-02 15:04:05")
+		},
 	}
 
 	// Parse the template with the FuncMap.
 	return template.New("index").Funcs(funcMap).Parse(string(data))
+}
+
+// groupFilesByDir groups the files by their directory.
+func groupFilesByDir(files []FileData) map[string][]FileData {
+	// Create a map to store the grouped files.
+	groupedFiles := make(map[string][]FileData)
+	// Iterate over the files and group them by directory.
+	for _, file := range files {
+		// Get the directory of the file.
+		dir := filepath.Dir(file.Path)
+		// Add the file to the list of files in the directory.
+		groupedFiles[dir] = append(groupedFiles[dir], file)
+	}
+	return groupedFiles
 }
 
 // handler is an HTTP handler that lists files in the given directory.
@@ -201,15 +233,17 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		filteredFiles = files
 	}
 
-	// Create a list of links to download the files.
-	var links []string
-	var filenames []string
-	// Iterate over the files and create a link for each file.
-	for _, file := range files {
-		link := fmt.Sprintf("/download-symlink?path=%s", file.Path) // Create link to download script
-		links = append(links, link)
-		filenames = append(filenames, extractFilename(file.Path))
+	// Group the files by directory.
+	groupedFiles := groupFilesByDir(filteredFiles)
+	// Sort the directories.
+	sortedDirs := make([]string, 0, len(groupedFiles))
+	// Iterate over the directories and add them to the sortedDirs list.
+	for dir := range groupedFiles {
+		// Add the directory to the list of sorted directories.
+		sortedDirs = append(sortedDirs, dir)
 	}
+	// Sort the directories alphabetically.
+	sort.Strings(sortedDirs)
 
 	// Get the index template.
 	tmpl, err := getIndexTemplate()
@@ -220,12 +254,15 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Render the template with the list of files.
+	// Render the template with the grouped files.
 	err = tmpl.Execute(w, struct {
-		Links     []string // Add links to download files
-		Filenames []string // Add filenames for display
-		Dir       string   // Add directory path as a field
-	}{links, filenames, dir})
+		GroupedFiles map[string][]FileData
+		Dir          string
+	}{
+		GroupedFiles: groupedFiles,
+		Dir:          dir,
+	})
+
 	// If there is an error, log it and return a 500 Internal Server Error.
 	if err != nil {
 		log.Println(err)
@@ -328,6 +365,8 @@ func main() {
 	http.HandleFunc("/", handler)
 	// The downloadHandler function serves the requested files.
 	http.HandleFunc("/download-symlink", downloadHandler)
+	// Serve static files from the images directory
+	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("images"))))
 	// Start the server on the configured port.
 	fmt.Printf("Server listening on port %s, serving directory %s\n", port, directory)
 	// The server will list files in the directory specified in the configuration.
