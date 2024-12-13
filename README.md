@@ -7,15 +7,13 @@
 - [go\_mysamples](#go_mysamples)
 - [Português](#português)
 - [English](#english)
-- [Tutorials](#tutorials)
-  - [Learn Go](#learn-go)
-  - [Go in Docker](#go-in-docker)
-  - [Install Go from source](#install-go-from-source)
-  - [Developers](#developers)
-  - [License](#license)
+- [Learn Go](#learn-go)
+- [Go in Docker](#go-in-docker)
+- [Install Go from source](#install-go-from-source)
+- [Developers](#developers)
+- [License](#license)
 
 <!-- TOC -->
-
 
 # Português
 
@@ -29,12 +27,13 @@ My first codes developed with the [Go](https://golang.org).
 
 * `src`: contains the source code and source code of third party packages imported into programs;
 
-# Tutorials
-
-## Learn Go
+# Learn Go
 
 Tutorials and documentation about **Go** language:
 
+* https://www.freecodecamp.org/news/learn-golang-handbook/
+* https://www.codecademy.com/catalog/subject/devops
+* https://www.codecademy.com/catalog/language/go
 * http://aprendago.com
 * https://golang.org/doc
 * https://golangr.com
@@ -81,16 +80,16 @@ Tutorials and documentation about **Go** language:
 * https://golang.org/ref/spec
 * https://golang.org/pkg/fmt/
 
-## Go in Docker
+# Go in Docker
 
 Use Go in Docker: https://hub.docker.com/_/golang
 
-```
+```bash
 git clone https://github.com/aeciopires/go_mysamples
 
 cd go_mysamples/src/helloworld
 
-VERSION=1.19-alpine
+VERSION=1.23-alpine
 GO_WORKSPACE=/usr/local/go/src
 docker run --rm -v $GO_WORKSPACE/:/go/src/ -v "$PWD":/usr/src/myapp -w /usr/src/myapp golang:$VERSION go build -v
 
@@ -99,14 +98,13 @@ docker run --rm -v $GO_WORKSPACE/:/go/src/ -v "$PWD":/usr/src/myapp -w /usr/src/
 
 This will add your current directory as a volume to the container, set the working directory to the volume, and run the command go build which will tell go to compile the project in the working directory and output the executable to myapp.
 
-## Install Go from source
+# Install Go from source
 
 Install **Go** from source. See [REQUIREMENTS](REQUIREMENTS.md#Go):
 
-
 Executing programs with **go**. Example:
 
-```
+```bash
 git clone https://github.com/aeciopires/go_mysamples
 
 cd go_mysamples/src/helloworld
@@ -120,11 +118,11 @@ go build helloworld.go
 go run helloworld.go
 ```
 
-## Developers
+# Developers
 
 developer: Aécio dos Santos Pires<br>
 mail: http://blog.aeciopires.com/contato
 
-## License
+# License
 
-GPL-3.0 2024 Aécio dos Santos Pires
+GPL-3.0 Aécio dos Santos Pires
