@@ -81,7 +81,7 @@ Tutorials and documentation about **Go** language:
 * https://golang.org/ref/spec
 * https://golang.org/pkg/fmt/
 
-# Challnges
+# Challenges
 
 * https://exercism.org/tracks/go
 * https://www.codewars.com/kata/search/go
