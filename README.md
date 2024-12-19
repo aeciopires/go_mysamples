@@ -8,6 +8,7 @@
 - [Português](#português)
 - [English](#english)
 - [Learn Go](#learn-go)
+- [Challnges](#challnges)
 - [Go in Docker](#go-in-docker)
 - [Install Go from source](#install-go-from-source)
 - [Developers](#developers)
@@ -79,6 +80,21 @@ Tutorials and documentation about **Go** language:
 * https://www.golangprograms.com/go-language.html
 * https://golang.org/ref/spec
 * https://golang.org/pkg/fmt/
+
+# Challnges
+
+* https://exercism.org/tracks/go
+* https://www.codewars.com/kata/search/go
+* https://www.hackerrank.com/
+* https://github.com/RajaSrinivasan/assignments
+* https://github.com/cblte/100-golang-exercises
+* https://gophercises.com/
+* https://codingchallenges.fyi/blog/learn-go/
+* https://labex.io/courses/go-practice-challenges
+* https://www.codechef.com/practice/go
+* https://medium.com/@prasgema/learn-golang-over-weekend-challenge-292fa89f80ca
+* https://coderbyte.com/challenges?utm_campaign=NewHomepage
+* https://gobyexample.com/
 
 # Go in Docker
 

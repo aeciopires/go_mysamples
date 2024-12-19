@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"os"
 	"strconv"
 	"strings"
 )
@@ -11,7 +10,7 @@ import (
 func main() {
 	// Reference: https://stackoverflow.com/a/34522375/8507770
 	// Create a single reader which can be called multiple times
-	reader := bufio.NewReader(os.Stdin)
+	reader := bufio.NewReader(tdin)
 	// Prompt and read
 	fmt.Print("Enter first number (type integer): ")
 	string1, _ := reader.ReadString('\n')
