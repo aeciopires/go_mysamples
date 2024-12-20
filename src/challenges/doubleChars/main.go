@@ -34,7 +34,6 @@ func main() {
 	fmt.Println("---------------------")
 	fmt.Println("Your turn...")
 
-	// Considering the block of 63 to 74 lines create a loop to calculate armstrong numbers using input and exit with word quit.
 	for {
 		fmt.Print("Enter a string (or type 'quit' to exit): ")
 		// Reference: https://stackoverflow.com/a/34522375/8507770
